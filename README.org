@@ -1,0 +1,17 @@
+In 2021, I finally decided to rationalize my dotfiles, which are currently pretty limited.
+
+I want a gorgeous and functional shell and Emacs experience, that I can understand, and leaves me room to incrementally grow.
+
+To wit, I use doom emacs, and my doom files are in a separate repo that predates this repo.
+
+What is here, currently, then, is shell configurations for both =zsh= and =fish=; specifically:
+
+1. The =zsh= version uses the =zinit= plugin manager (after earlier using prezto), with a "lean" prompt from the excellent =powerlevel10k= theme.
+2. The =fish= version uses =fisher= and the =tide= theme, which is a port of =powerlevel10k=.
+
+The configurations are /very/ similar functionally and visually.
+But I spent /much/ more time on the =zsh= version than on the =fish=; hassling with details like environment variables, bugs, etc.
+The =fish= version also involves much less code, that is simpler.
+
+So it's looking like I'll focus on =fish= going forward.
+I always have access to =bash= if I need it.

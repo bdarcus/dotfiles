@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# run from root of repo:
+# bin/copydots
+
+BASEDIR=$PWD
+LINKDIR=$XDG_CONFIG_HOME
+FILES="fish/config.fish
+fish/fish_plugins
+nvim/local_init.vim
+zsh/myzinit.zsh
+waybar/config
+waybar/style.css
+alacritty/alacritty.yml"
+
+for file in $FILES
+do
+    rm -f "$LINKDIR/$file"
+    ln -s "$BASEDIR/$file" "$LINKDIR/$file"
+done
+

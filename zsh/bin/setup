@@ -1,0 +1,32 @@
+
+# setup up XDG env variables
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME="$HOME"/.cache
+export XDG_DATA_HOME="$HOME"/.local/share
+export ZDOTDIR=$XDG_CONFIG_HOME/zsh
+
+
+ZSHENV='
+if [[ -z "$XDG_CONFIG_HOME" ]]
+then
+        export XDG_CONFIG_HOME="$HOME/.config"
+fi
+if [[ -d "$XDG_CONFIG_HOME/zsh" ]]
+then
+        export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+fi
+'
+
+if [[ ! /etc/zshenv ]]
+then
+  printf "$ZSHENV" > /etc/zshenv
+fi
+
+if [[ ! -d $ZDOTDIR ]]
+then
+  printf "\nmaking zsh directory .....\n"
+  mkdir $ZDOTDIR
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+else
+  printf "\n$ZDOTDIR already exists .....\n"
+fi
