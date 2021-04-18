@@ -1,0 +1,7 @@
+
+# emacs; we only need to VC the doom directory
+/emacs
+
+# shell stuff
+.zcompdump
+.zinit
