@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+for file in *.fish; do
+  echo "$file"
+  destdir="$HOME/.config/fish"
+  dest_path=$destdir/$file
+  echo $dest_path
+  cp "$file" "$dest_path"
+done
