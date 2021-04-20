@@ -7,9 +7,11 @@ To wit, I use doom emacs, and my doom files are in a separate repo that predates
 What is here, currently, then, is shell configurations for both =zsh= and =fish=; specifically:
 
 1. The =zsh= version uses the =zinit= plugin manager (after earlier using prezto), with a "lean" prompt from the excellent =powerlevel10k= theme.
-2. The =fish= versions uses =fisher= and the =tide= theme, which is a port of =powerlevel10k=.
+2. The =fish= version uses =fisher= and the =tide= theme, which is a port of =powerlevel10k=.
 
 The configurations are /very/ similar functionally and visually.
 But I spent /much/ more time on the =zsh= version than on the =fish=; hassling with details like environment variables, bugs, etc.
+The =fish= version also involves much less code, that is simpler.
 
-So it's looking like I may focus on =fish= going forward.
+So it's looking like I'll focus on =fish= going forward.
+I always have access to =bash= if I need it.
