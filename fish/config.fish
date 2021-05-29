@@ -1,4 +1,4 @@
-set PATH $HOME/go/bin $HOME/.cargo/bin $PATH
+set PATH $HOME/go/bin $HOME/.cabal/bin $HOME/.cargo/bin $PATH
 
 # use bat for manpaging, to get colors
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
@@ -12,3 +12,34 @@ set -gx LS_COLORS 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40
 # set notification of complete process to sound
 set -U __done_notify_sound 1
 
+# https://gist.github.com/lonsun/23df675f631f38f942be53bf4fe28570
+function git_clean_branches
+  set base_branch main
+
+  # work from our base branch
+  git checkout $base_branch
+
+  # remove local tracking branches where the remote branch is gone
+  git fetch -p
+
+  # find all local branches that have been merged into the base branch
+  # and delete any without a corresponding remote branch
+  set local
+  for f in (git branch --merged $base_branch | grep -v "\(master\|$base_branch\|\*\)" | awk '/\s*\w*\s*/ {print $1}')
+  set local $local $f
+  end
+
+  set remote
+  for f in (git branch -r | xargs basename)
+    set remote $remote $f
+  end
+
+  for f in $local
+    echo $remote | grep --quiet "\s$f\s"
+    if [ $status -gt 0 ]
+      git branch -d $f
+    end
+  end
+end
+
+alias config='/usr/bin/git --git-dir=/home/bruce/.cfg/ --work-tree=/home/bruce'
