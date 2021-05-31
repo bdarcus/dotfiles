@@ -2,12 +2,14 @@ set guicursor=i:ver25-iCursor
 
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vim-pandoc/vim-pandoc-after'
 
 """"""""""""""""""""""""""""""
 " VIM-PANDOC
 """"""""""""""""""""""""""""""
 let g:pandoc#filetypes#handled = ['pandoc', 'markdown']
-let g:pandoc#modules#disabled = ['folding', 'spell']
+let g:pandoc#filetypes#pandoc_markdown = 0
+"let g:pandoc#modules#disabled = ['folding', 'spell']
 let g:pandoc#biblio#bibs = ['/home/bruce/org/bib/academic.bib']
 
 """"""""""""""""""""""""""""""
