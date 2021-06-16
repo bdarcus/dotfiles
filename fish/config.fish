@@ -1,4 +1,4 @@
-set PATH $HOME/go/bin $HOME/.cabal/bin $HOME/.cargo/bin $PATH
+set PATH $HOME/.local/bin $HOME/go/bin $HOME/.cabal/bin $HOME/.cargo/bin $PATH
 
 # use bat for manpaging, to get colors
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
