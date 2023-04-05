@@ -26,10 +26,11 @@ font:
 cursor:
   style:
     shape: Beam
-    blinking: Always
+    blinking: On
   blink_interval: 500
   unfocused_hollow: true
   thickness: 0.15
+  vi_mode_style: Block
 
 shell:
   program: /usr/bin/fish
