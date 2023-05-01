@@ -1,5 +1,10 @@
-
-set PATH $HOME/.cargo/bin $HOME/.local/share/bob/nvim-bin $HOME/bin $HOME/racket/bin $HOME/.config/emacs/bin $HOME/.nimble/bin $HOME/.local/bin $HOME/go/bin $HOME/.cabal/bin $PATH
+set BUN_INSTALL "$HOME/.bun"
+set -gx PNPM_HOME "$HOME/.local/share/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH
+set -gx DENO_INSTALL $HOME/.deno
+set -gx FNM_HOME $HOME/.local/share/fnm
+set -gx PATH "$FNM_HOME" $PATH
+set PATH $BUN_INSTALL/bin $DENO_INSTALL/bin $HOME/.ghcup/bin $HOME/.cargo/bin $HOME/.local/share/bob/nvim-bin $HOME/bin $HOME/racket/bin $HOME/.config/emacs/bin $HOME/.nimble/bin $HOME/.local/bin $HOME/go/bin $HOME/.cabal/bin $PATH
 
 # use bat for manpaging, to get colors
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
@@ -54,3 +59,7 @@ alias config='/usr/bin/git --git-dir=/home/bruce/.cfg/ --work-tree=/home/bruce'
 
 # opam configuration
 source /home/bruce/.opam/opam-init/init.fish >/dev/null 2>/dev/null; or true
+
+# tabtab source for packages
+# uninstall by removing these lines
+[ -f ~/.config/tabtab/fish/__tabtab.fish ]; and . ~/.config/tabtab/fish/__tabtab.fish; or true
