@@ -10,11 +10,9 @@ nvim/local_init.vim
 zsh/myzinit.zsh
 waybar/config
 waybar/style.css
-alacritty/alacritty.yml"
+alacritty/alacritty.toml"
 
-for file in $FILES
-do
-    rm -f "$LINKDIR/$file"
-    ln -s "$BASEDIR/$file" "$LINKDIR/$file"
+for file in $FILES; do
+	rm -f "$LINKDIR/$file"
+	ln -s "$BASEDIR/$file" "$LINKDIR/$file"
 done
-
