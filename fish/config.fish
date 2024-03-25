@@ -6,7 +6,7 @@ set -gx PATH "$PNPM_HOME" $PATH
 set -gx DENO_INSTALL $HOME/.deno
 set -gx FNM_HOME $HOME/.local/share/fnm
 set -gx PATH "$FNM_HOME" $PATH
-set PATH $BUN_INSTALL/bin $DENO_INSTALL/bin $HOME/.ghcup/bin $HOME/.cargo/bin $HOME/.local/share/bob/nvim-bin $HOME/bin $HOME/racket/bin $HOME/.config/emacs/bin $HOME/.nimble/bin $HOME/.local/bin $HOME/go/bin $HOME/.cabal/bin $PATH
+set PATH /usr/local/go/bin $BUN_INSTALL/bin $HOME/.local/share/nvim/mason/bin $DENO_INSTALL/bin $HOME/.ghcup/bin $HOME/.cargo/bin $HOME/.local/share/bob/nvim-bin $HOME/bin $HOME/racket/bin $HOME/.config/emacs/bin $HOME/.nimble/bin $HOME/.local/bin $HOME/go/bin $HOME/.cabal/bin $PATH
 
 # use bat for manpaging, to get colors
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
