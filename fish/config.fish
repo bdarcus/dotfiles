@@ -1,5 +1,10 @@
 bind \t accept-autosuggestion
 
+# Use XDG_CONFIG_HOME if not already set
+if not set -q XDG_CONFIG_HOME
+    set -x XDG_CONFIG_HOME $HOME/.config
+end
+
 set BUN_INSTALL "$HOME/.bun"
 set -gx PNPM_HOME "$HOME/.local/share/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
