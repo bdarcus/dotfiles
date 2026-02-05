@@ -18,7 +18,7 @@ set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 # set this to correct artifacts
 set -x MANROFFOPT -c
 
-set -gx EDITOR nvim
+set -gx EDITOR hx
 set -gx GIT_EDITOR $EDITOR
 
 set RATIONAL_EMACS_HOME $HOME/Code/rational-emacs
@@ -33,32 +33,65 @@ set -gx LS_COLORS 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40
 # set notification of complete process to sound
 set -U __done_notify_sound 1
 
-# https://gist.github.com/lonsun/23df675f631f38f942be53bf4fe28570
 function git_clean_branches
-    set base_branch main
+    set force 0
 
-    # work from our base branch
-    git checkout $base_branch
-
-    # remove local tracking branches where the remote branch is gone
-    git fetch -p
-
-    # find all local branches that have been merged into the base branch
-    # and delete any without a corresponding remote branch
-    set local
-    for f in (git branch --merged $base_branch | grep -v "\(master\|$base_branch\|\*\)" | awk '/\s*\w*\s*/ {print $1}')
-        set local $local $f
+    # Parse args
+    for arg in $argv
+        switch $arg
+            case --force -f
+                set force 1
+            case '*'
+                echo "Unknown option: $arg"
+                return 1
+        end
     end
 
-    set remote
-    for f in (git branch -r | xargs basename)
-        set remote $remote $f
+    # Make sure we're in a git repo
+    git rev-parse --is-inside-work-tree >/dev/null 2>&1
+    or begin
+        echo "Not inside a git repository."
+        return 1
     end
 
-    for f in $local
-        echo $remote | grep --quiet "\s$f\s"
-        if [ $status -gt 0 ]
-            git branch -d $f
+    # Ensure main exists
+    git show-ref --verify --quiet refs/heads/main
+    or begin
+        echo "No local 'main' branch found."
+        return 1
+    end
+
+    echo "Fetching latest refs..."
+    git fetch --prune
+
+    echo "Checking out main..."
+    git checkout main >/dev/null 2>&1
+    or begin
+        echo "Failed to checkout main."
+        return 1
+    end
+
+    # Get all local branches except main
+    set branches (git for-each-ref --format='%(refname:short)' refs/heads | grep -v '^main$')
+
+    if test (count $branches) -eq 0
+        echo "No local branches to delete."
+        return 0
+    end
+
+    for branch in $branches
+        if test $force -eq 1
+            echo "Force deleting $branch"
+            git branch -D $branch
+        else
+            # Only delete if merged into main
+            git merge-base --is-ancestor $branch main
+            if test $status -eq 0
+                echo "Deleting merged branch $branch"
+                git branch -d $branch
+            else
+                echo "Skipping unmerged branch $branch (use --force to delete)"
+            end
         end
     end
 end
