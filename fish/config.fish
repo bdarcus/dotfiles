@@ -21,6 +21,8 @@ set -x MANROFFOPT -c
 set -gx EDITOR hx
 set -gx GIT_EDITOR $EDITOR
 
+set -x GPG_TTY (tty)
+
 set RATIONAL_EMACS_HOME $HOME/Code/rational-emacs
 
 alias clj="rlwrap clojure"
