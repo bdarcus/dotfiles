@@ -1,6 +1,4 @@
-limakzi/fisher-catbat
 jorgebucaran/fisher
-IlanCosman/tide
 jhillyerd/plugin-git
 PatrickF1/fzf.fish
 b4b4r07/enhancd
@@ -9,3 +7,5 @@ gazorby/fish-exa
 jethrokuan/z
 jorgebucaran/autopair.fish
 orefalo/grc
+ilancosman/tide@v6
+givensuman/fish-eza
