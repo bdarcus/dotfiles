@@ -18,13 +18,26 @@ set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 # set this to correct artifacts
 set -x MANROFFOPT -c
 
-set -gx EDITOR hx
-set -gx GIT_EDITOR $EDITOR
+if status is-interactive
+    set -gx EDITOR hx
+    set -gx GIT_EDITOR $EDITOR
+else
+    if test "$EDITOR" = "hx"
+        set -e EDITOR
+    end
+    if test "$GIT_EDITOR" = "hx"
+        set -e GIT_EDITOR
+    end
+    if test "$VISUAL" = "hx"
+        set -e VISUAL
+    end
+end
 
 set -x GPG_TTY (tty)
 
 set RATIONAL_EMACS_HOME $HOME/Code/rational-emacs
 
+alias citum-next="bash ~/Code/citum/citum-core/.claude/skills/beans/bin/citum-bean next"
 alias clj="rlwrap clojure"
 alias open=xdg-open
 alias rm=trash
